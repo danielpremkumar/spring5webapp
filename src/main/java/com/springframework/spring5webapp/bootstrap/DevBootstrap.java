@@ -30,7 +30,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         bookRepository.save(ddd);
 
         //George Orwell
-        Author orwell = new Author();
+        Author orwell = new Author("George", "Orwell");
         Book animalFarm = new Book("Animal Farm", "4231", "Penguin Books India");
         orwell.getBooks().add(animalFarm);
         animalFarm.getAuthors().add(orwell);
