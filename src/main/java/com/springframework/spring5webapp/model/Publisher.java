@@ -1,14 +1,12 @@
 package com.springframework.spring5webapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Publisher {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
@@ -17,7 +15,7 @@ public class Publisher {
     private String city;
     private String state;
     private String zipCode;
-    @OneToOne
+    @OneToOne//(mappedBy = "author")
     private Book book;
 
     public Publisher() {

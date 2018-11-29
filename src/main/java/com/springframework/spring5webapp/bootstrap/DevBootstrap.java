@@ -31,11 +31,19 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "123 Charming Avenue", "Dallas", "Texas", "75001");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
+        //Publisher should be saved before Book,
+        // else Spring will throw error due to the way the entities are linked
+        publisherRepository.save(harper);
         ddd.setPublisher(harper);
         harper.setBook(ddd);
 
         authorRepository.save(eric);
         bookRepository.save(ddd);
+        //Need to save Publisher again after setting book details
+        publisherRepository.save(harper);
+
+
+
 
         //George Orwell
         Author orwell = new Author("George", "Orwell");
@@ -44,12 +52,15 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Westminister", "London", "SW1A 2AB");
         orwell.getBooks().add(animalFarm);
         animalFarm.getAuthors().add(orwell);
+        publisherRepository.save(penguin);
         animalFarm.setPublisher(penguin);
         penguin.setBook(animalFarm);
 
 
         authorRepository.save(orwell);
         bookRepository.save(animalFarm);
+        publisherRepository.save(penguin);
+
     }
 
     @Override
